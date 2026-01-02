@@ -1,0 +1,33 @@
+Autonomy is the most promising feature of the ai agentic system but we have to control autonomy of an ai agentic system 
+
+We can restrict autonomy of an agentic system by some of the ways which are discussed below : 
+- Premission Scope
+- Human in the Loop
+- override controls 
+- Guardrails / Policies
+
+AI agents always make multiple plans and agents make more than one plan and choose one depending upon some parameters like efficiency , cost , risk , alignment and tool_availability
+
+AI agents has multiple characteristics:
+- Autonomy
+- Goal Orientiated 
+- Planning 
+- Reasoning
+- Adapatibility
+- Context Awareness
+
+AI agents has multiple level Components : 
+- Brain 
+- Tools 
+- Orchestrator
+- Memory
+- Supervisor
+
+# LangGraph :
+
+🔹Nodes = Actions 
+🔹Edges = Decision / Routing
+🔹State = Memory / Context of the graph
+
+# Intution in LangGraph : 
+- 

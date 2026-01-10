@@ -151,5 +151,5 @@ initial_state = {
 
 result = agent.invoke(initial_state)
 
-for msg in result["messages"]:
-    msg.pretty_print()
+# for msg in result["messages"]:
+#     msg.pretty_print()

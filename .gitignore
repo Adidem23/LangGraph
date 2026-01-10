@@ -1,2 +1,6 @@
 ./venv
 .env
+__init__.py
+.adk
+.adk/artifacts
+__pycache__

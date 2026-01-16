@@ -1,0 +1,8 @@
+uvicorn 
+fastapi 
+httpx 
+pydantic 
+a2a-sdk[http-server]>=0.3.0
+langgraph 
+google-adk
+python-dotenv

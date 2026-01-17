@@ -11,14 +11,14 @@ import uvicorn
 if __name__=="__main__":
 
     agent_skill=AgentSkill(
-        id="Supervisor Agent",
-        name="Supervisor Agent",
+        id="Supervisor_Agent",
+        name="Supervisor_Agent",
         description="This is a Supervisor Node for Query and Math agent",
         tags=["orchestator","supervisor","delegation"]
     )
 
     agent_card=AgentCard(
-        name="Supervisor Agent",
+        name="Supervisor_Agent",
         description="This is a Supervisor Node for Query and Math agent",
         url="http://localhost:8004",
         version="1.0.0",
@@ -38,11 +38,3 @@ if __name__=="__main__":
     )
 
     uvicorn.run(app.build(), host='0.0.0.0', port=8004)
-
-
- 
-   
-
-
-
-

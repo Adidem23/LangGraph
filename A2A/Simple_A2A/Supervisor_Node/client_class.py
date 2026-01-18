@@ -1,4 +1,3 @@
-import asyncio
 import httpx
 from a2a.client import (
     A2ACardResolver,
@@ -6,24 +5,22 @@ from a2a.client import (
     ClientFactory,
     create_text_message_object
 )
-
 from a2a.types import TransportProtocol
 from a2a.utils.message import get_message_text
 
 
-class Agent_Client:
+class Agent_Client_Class:
 
-    async def create_connection(url:str,user_input:str):
+    async def create_connection(self, url: str, user_input: str):
 
         async with httpx.AsyncClient() as httpx_client:
-            
-            resolver=A2ACardResolver(
+
+            resolver = A2ACardResolver(
                 httpx_client=httpx_client,
                 base_url=url
             )
 
             try:
-           
                 agent_card = await resolver.get_agent_card()
 
                 config = ClientConfig(
@@ -37,20 +34,17 @@ class Agent_Client:
 
                 client = ClientFactory(config).create(agent_card)
 
-                try:
-                    request = create_text_message_object(content=user_input)
+                request = create_text_message_object(content=user_input)
 
-                    async for response in client.send_message(request):
-                        task, _ = response
-                        return get_message_text(task.artifacts[-1])
+                result = None
 
-                except Exception as e:
-                    print(f'An error occurred: {e}')
+                async for response in client.send_message(request):
+                    task, _ = response
+                    result = get_message_text(task.artifacts[-1])
+                    break   
 
+                return result
 
             except Exception as e:
-                print(f'Error initializing client: {e}')
-
-    
-
-            
+                print(f'Error initializing or sending message: {e}')
+                return None

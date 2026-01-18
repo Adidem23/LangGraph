@@ -35,7 +35,7 @@ class queryAgentExecutor(AgentExecutor):
         await event_queue.enqueue_event(
             TaskStatusUpdateEvent(
                 context_id=context.context_id,
-                task_id=context.context_id,
+                task_id=context.task_id,
                 status=TaskStatus(state=TaskState.completed),
                 final=True
             )

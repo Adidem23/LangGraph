@@ -36,7 +36,7 @@ if __name__=="__main__":
 
     request_handler=DefaultRequestHandler(
         agent_executor=queryAgentExecutor(),
-        task_store=InMemoryTaskStore
+        task_store=InMemoryTaskStore()
     )
 
     app=A2AStarletteApplication(

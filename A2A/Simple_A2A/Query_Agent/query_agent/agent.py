@@ -42,8 +42,8 @@ Always respond in plain text.
 
         await sessionService.create_session(
             app_name="Query_agent",
-            user_id="user1",
-            session_id="sesssion1",
+            user_id="user2",
+            session_id="session2",
         )
 
         runner=Runner(
@@ -58,8 +58,8 @@ Always respond in plain text.
         )
 
         async for event in runner.run_async(
-            user_id="user1",
-            session_id="session1",
+            user_id="user2",
+            session_id="session2",
             new_message=user_message
         ):
             

@@ -1,17 +1,5 @@
+from client_class import Agent_Client_Class
 import asyncio
-
-import httpx
-
-from a2a.client import (
-    A2ACardResolver,
-    Client,
-    ClientConfig,
-    ClientFactory,
-    create_text_message_object,
-)
-from a2a.types import TransportProtocol
-from a2a.utils.message import get_message_text
-
 
 def print_welcome_message() -> None:
     print('Welcome to the generic A2A client!')
@@ -22,56 +10,20 @@ def get_user_query() -> str:
     return input('\n> ')
 
 
-async def interact_with_server(client: Client) -> None:
-    while True:
-        user_input = get_user_query()
-        if user_input.lower() == 'exit':
-            print('bye!~')
-            break
-
-        try:
-            request = create_text_message_object(content=user_input)
-
-            async for response in client.send_message(request):
-                task, _ = response
-                print(get_message_text(task.artifacts[-1]))
-
-        except Exception as e:
-            print(f'An error occurred: {e}')
+async def main(BASE_URL,user_query):    
+    client=Agent_Client_Class()
+    response=await client.create_connection(BASE_URL,user_query)
+    return {"text":response}
 
 
-async def main() -> None:
-    
+if __name__=="__main__":
+
     print_welcome_message()
 
-    async with httpx.AsyncClient() as httpx_client:
-        
-        resolver = A2ACardResolver(
-            httpx_client=httpx_client,
-            base_url='http://localhost:8004'
-        )
+    user_input = get_user_query()
 
-        try:
-           
-            agent_card = await resolver.get_agent_card()
+    SUPERVISOR_NODE_BASE_URL="http://localhost:8004"
 
-            config = ClientConfig(
-                httpx_client=httpx_client,
-                supported_transports=[
-                    TransportProtocol.jsonrpc,
-                    TransportProtocol.http_json,
-                ],
-                streaming=agent_card.capabilities.streaming,
-            )
+    fun_response=asyncio.run(main(SUPERVISOR_NODE_BASE_URL,user_input))
 
-            client = ClientFactory(config).create(agent_card)
-
-        except Exception as e:
-            print(f'Error initializing client: {e}')
-            return
-
-        await interact_with_server(client)
-
-
-if __name__ == '__main__':
-    asyncio.run(main())
+    print(fun_response)

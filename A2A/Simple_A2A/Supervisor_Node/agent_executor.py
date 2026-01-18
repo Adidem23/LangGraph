@@ -8,11 +8,12 @@ from a2a.types import (
 ) 
 from a2a.utils import new_text_artifact
 from agent.agent import SupervisorAgent
-import httpx
+from client_class import Agent_Client_Class
 
 class SupervisorAgentExecutor(AgentExecutor):
     def __init__(self):
         self.agent=SupervisorAgent()
+        self.client=Agent_Client_Class()
 
     async def execute(self,context:RequestContext,event_queue:EventQueue):
         
@@ -23,8 +24,7 @@ class SupervisorAgentExecutor(AgentExecutor):
         QUERY_BOT_URL="http://localhost:8005"
 
         if decision=="query":
-            async with httpx.AsyncClient(timeout=None) as httpxclient:
-                response=await httpxclient.post(QUERY_BOT_URL,json={"input":user_query})
+            response=await self.client.create_connection(QUERY_BOT_URL,user_query)
 
         else:
             response={
@@ -38,7 +38,7 @@ class SupervisorAgentExecutor(AgentExecutor):
                 task_id=context.task_id,
                 artifact=new_text_artifact(
                     "final_answer",
-                    response.text,
+                    str(response)
                 ),
             )
         )

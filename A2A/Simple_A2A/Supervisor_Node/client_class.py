@@ -41,7 +41,6 @@ class Agent_Client_Class:
                 async for response in client.send_message(request):
                     task, _ = response
                     result = get_message_text(task.artifacts[-1])
-                    break   
 
                 return result
 

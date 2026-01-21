@@ -10,7 +10,7 @@ class SupervisorAgent:
     def __init__(self):
         self.agent=Agent(
             name="Supervisor_Agent",
-            model="gemini-2.0-flash",
+            model="gemini-2.5-flash",
             instruction=("You are a supervisor agent.\n"
                 "Decide which agent should handle the user query.\n"
                 "Respond with ONLY one word:\n"

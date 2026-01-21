@@ -12,7 +12,7 @@ class QueryAgent:
         self.agent=Agent(
             name="Query_agent",
             description="This is a simple Query Resolution Agent",
-            model="gemini-2.0-flash",
+            model="gemini-2.5-flash",
             instruction=("""You are a Query Resolution Agent.
 
 Your role is to handle GENERAL, NON-MATHEMATICAL user queries.

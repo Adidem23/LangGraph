@@ -22,15 +22,13 @@ class SupervisorAgentExecutor(AgentExecutor):
         decision=await self.agent.decide(user_query)
 
         QUERY_BOT_URL="http://localhost:8005"
+        MATH_BOT_URL="http://localhost:8006"
 
         if decision=="query":
             response=await self.client.create_connection(QUERY_BOT_URL,user_query)
 
         else:
-            response={
-                "text":"math"
-            }
-            return response
+            response= await self.client.create_connection(MATH_BOT_URL,user_query)
         
         await event_queue.enqueue_event(
             TaskArtifactUpdateEvent(

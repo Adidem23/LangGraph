@@ -7,3 +7,5 @@ langgraph
 google-adk
 python-dotenv
 fastmcp
+langchain-mcp-adapaters
+mcp

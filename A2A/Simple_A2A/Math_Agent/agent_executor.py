@@ -16,9 +16,11 @@ class MathAgentExecutor(AgentExecutor):
     async def execute(self, context:RequestContext, event_queue:EventQueue):
         
         user_query= context.get_user_input()
+        
         messages=[HumanMessage(content=f'{user_query}')]
 
         result= await math_agent.ainvoke({"messages":messages,"query":user_query})
+        print(result)
 
         await event_queue.enqueue_event(
             TaskArtifactUpdateEvent(
@@ -26,7 +28,7 @@ class MathAgentExecutor(AgentExecutor):
                 task_id=context.task_id,
                 artifact=new_text_artifact(
                     "Math_agent_anwer",
-                    result['result']
+                    str(result)
                 )
 
             )

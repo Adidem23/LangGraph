@@ -19,6 +19,7 @@ class queryAgentExecutor(AgentExecutor):
         user_query= context.get_user_input()
 
         llm_output=await self.agent.resolveUserQuery(user_query)
+        print("query_Agent"+str(llm_output))
 
         await event_queue.enqueue_event(
             TaskArtifactUpdateEvent(

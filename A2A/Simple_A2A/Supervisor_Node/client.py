@@ -10,10 +10,12 @@ def get_user_query() -> str:
     return input('\n> ')
 
 
-async def main(BASE_URL,user_query):    
+async def main(BASE_URL,user_query):   
     client=Agent_Client_Class()
+
     response=await client.create_connection(BASE_URL,user_query)
-    return {"text":response}
+
+    return {"text":str(response)}
 
 
 if __name__=="__main__":
